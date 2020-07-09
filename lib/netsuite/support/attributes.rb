@@ -24,6 +24,9 @@ module NetSuite
         end
         self.klass = attributes[:class] if attributes[:class]
       end
+      def respond_to?(m)
+        self.initiation_attributes.include?(m) ? true : super
+      end
       def method_missing(m, *args, &block)
         rv = initiation_attributes[m]
         if rv.nil?
